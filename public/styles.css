@@ -1,0 +1,41 @@
+h1 {
+  font-size:3em;
+  text-decoration: underline;
+}
+
+.navbar {
+  margin-bottom: 0;
+}
+.main-field {
+  padding:0;
+
+}
+
+.container-fluid {
+  padding:0;
+}
+
+.sidebar {
+  padding:20px;
+  background-color: grey;
+}
+
+.sidebar input {
+  margin-bottom:10px;
+}
+
+.sidebar form {
+  margin-bottom:20px;
+}
+
+.album .latest-albums {
+  list-style-type: none;
+}
+
+/* Medium Devices, Desktops */
+@media only screen and (min-width : 992px) {
+ .sidebar {
+  border-left:1px solid black;
+  min-height: 750px;
+ }
+}

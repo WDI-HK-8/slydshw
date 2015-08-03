@@ -3,10 +3,52 @@
     <head>
       <meta charset="utf-8">
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
-      <title></title>
-      <link rel="stylesheet" href="">
+      <title>SLiDSHW</title>
+      <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+      <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+      <link rel="stylesheet" type="text/css" href="public/styles.css">
+      <script type="text/javascript" src="public/application.js"></script>
     </head>
     <body>
-      <h1>Hello World</h1>  
+      <nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="#">SLiDSHW</a>
+            <!-- /navbar-header -->
+          </div>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#">Hello User</a></li>
+          </ul>
+          <!-- /container-fluid -->
+        </div>
+        <!-- navbar -->
+      </nav>
+      <div class="container-fluid">
+        <section class="main-field col-md-9 col-xs-12 container-fluid text-center">
+          <h1>Latest Albums</h1>
+          <ul class="latest-albums list-unstyled">
+            <li class="albums"><a href="#">Hello World</a>
+          </ul>
+          <!-- /main-field -->
+        </section>
+        <section class="sidebar col-md-3 col-xs-12 container-fluid">
+          <form id="login">
+            <input type="text" class="form-control" placeholder="Username">
+            <input type="password" class="form-control" placeholder="Password">
+            <input type="submit" class="btn btn-default pull-right" value="Log In">
+          </form>
+          <form id="sign-up">
+            <input type="text" class="form-control" placeholder="Username">
+            <input type="password" class="form-control" placeholder="Password">
+            <input type="email" class="form-control" placeholder="Email">
+            <input type="text" class="form-control" placeholder="Name">
+
+            <input type="submit" class="btn btn-default pull-right" value="Sign Up">
+          </form>
+          <!-- /sidebar -->
+        </section>
+        <!-- /container-fluid -->
+      </div>
     </body>
   </html>
