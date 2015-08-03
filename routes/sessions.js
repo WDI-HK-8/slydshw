@@ -47,7 +47,7 @@ exports.register = function (server, options, next) {
               //create cookie
               request.session.set('slidshw_session', session);
               //Send reply
-              reply({ authorized: true });
+              reply({ authorized: true, username: userMongo.username });
             });
           })
         });

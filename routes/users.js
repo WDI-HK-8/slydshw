@@ -19,7 +19,7 @@ exports.register = function(server, options, next) {
           };
           var uniqueUser = {
             $or: [
-              {user: user.username},
+              {username: user.username},
               {email: user.email}
             ]
           };

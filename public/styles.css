@@ -32,6 +32,11 @@ h1 {
   list-style-type: none;
 }
 
+.alert-danger {
+  margin-top: 50px;
+  display: none;
+}
+
 /* Medium Devices, Desktops */
 @media only screen and (min-width : 992px) {
  .sidebar {

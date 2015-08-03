@@ -18,7 +18,7 @@
             <!-- /navbar-header -->
           </div>
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">Hello User</a></li>
+            <li><a href="#">Hello <span id="show-username">Guest</span></a></li>
           </ul>
           <!-- /container-fluid -->
         </div>
@@ -33,23 +33,25 @@
           <!-- /main-field -->
         </section>
         <section class="sidebar col-md-3 col-xs-12 container-fluid">
-          <form id="login">
-            <input type="text" class="form-control" placeholder="Username">
-            <input type="password" class="form-control" placeholder="Password">
-            <input type="submit" class="btn btn-default pull-right" value="Log In">
-          </form>
-          <form id="sign-up">
-            <input type="text" class="form-control" placeholder="Username">
-            <input type="password" class="form-control" placeholder="Password">
-            <input type="email" class="form-control" placeholder="Email">
-            <input type="text" class="form-control" placeholder="Name">
+          <div class="login-bar">
+            <form id="login">
+              <input type="text" name="username-login" class="form-control" placeholder="Username">
+              <input type="password" name="password-login" class="form-control" placeholder="Password">
+              <input type="submit" class="btn btn-default pull-right" value="Log In">
+            </form>
+            <form id="sign-up">
+              <input type="text" name="username-sign-up" class="form-control" placeholder="Username">
+              <input type="password" name="password-sign-up" class="form-control" placeholder="Password">
+              <input type="email" name="email-sign-up" class="form-control" placeholder="Email">
+              <input type="text" name="name-sign-up" class="form-control" placeholder="Name">
 
-            <input type="submit" class="btn btn-default pull-right" value="Sign Up">
-          </form>
+              <input type="submit" class="btn btn-default pull-right" value="Sign Up">
+            </form>
+            <div class="alert alert-danger" role="alert">Hello World</div>
+          </div>
           <!-- /sidebar -->
         </section>
         <!-- /container-fluid -->
       </div>
     </body>
   </html>
-  

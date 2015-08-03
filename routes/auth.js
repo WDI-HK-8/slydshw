@@ -18,6 +18,10 @@ module.exports.authenticated = function (request, callback) {
       });
     }
     //session matches
-    callback({authenticated: true, user_id: session.user_id});
+    //grab username
+    db.collection('users').findOne({'_id': session.user_id}, function(err, user) {
+      if (err) {return reply(err)}
+      callback({authenticated: true, user_id: session.user_id, username: user.username});
+    })
   })
 }
