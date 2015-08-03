@@ -68,8 +68,7 @@ exports.register = function (server, options, next) {
       path: '/sessions',
       handler: function (request, reply) {
         var db = request.server.plugins['hapi-mongodb'].db;
-        var ObjectID = request.server.plugins['hapi-mongodb'].ObjectID;
-        //authenticate
+        //authenticate through cookie to make sure you're deleting your own session
         Auth.authenticated(request, function(result) {
           if (!result.authenticated) { return reply(result) };
           var sessionID = request.session.get('slidshw_session').session_id;

@@ -1,5 +1,6 @@
 var Bcrypt = require('bcrypt');
 var Joi = require('joi');
+var Auth = require('./auth');
 exports.register = function(server, options, next) {
   //define routes
   server.route([
@@ -52,6 +53,31 @@ exports.register = function(server, options, next) {
             }
           }
         }
+      }
+    },
+    {
+      method: 'DELETE',
+      path: '/users/{username}',
+      handler: function(request, reply) {
+        var username = encodeURIComponent(request.params.username);
+        var db = request.server.plugins['hapi-mongodb'].db;
+        var ObjectID = request.server.plugins['hapi-mongodb'].ObjectID;
+        //ensure user is the user by using the cookie
+        Auth.authenticated(request, function(result) {
+          if (!result.authenticated) {
+            return reply({authorized: false});
+          }
+          //Search user ID in mongo db to get user name
+          db.collection('users').findOne({'_id': ObjectID(result.user_id)}, function(err, user) {
+            if (user == null) { return reply({nullUser: true});}
+            if (user.username != username) { return reply({sameUser: false});}
+            //Same user so we can delete
+            db.collection('users').remove({"username": username}, function(err, deleteReply) {
+              if (err) { return reply(err);}
+              reply(deleteReply);
+            });
+          });
+        });
       }
     }
   ]);
