@@ -1,3 +1,5 @@
+//Making request through node
+var Request = require('request');
 exports.register = function(server, options, next) {
   server.route([
     {
@@ -5,7 +7,10 @@ exports.register = function(server, options, next) {
       path: '/albums',
       config: {
         handler: function(request, reply) {
-          reply('Hello World');
+          var db = request.server.plugins['hapi-mongodb'].db;
+          var album = request.payload.album;
+
+          db.collection(album)
         }
       }
     }
