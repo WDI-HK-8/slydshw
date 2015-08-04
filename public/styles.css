@@ -41,6 +41,6 @@ h1 {
 @media only screen and (min-width : 992px) {
  .sidebar {
   border-left:1px solid black;
-  min-height: 750px;
+  min-height: 90vh;
  }
 }
