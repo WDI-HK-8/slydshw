@@ -7,7 +7,7 @@ exports.register = function(server, options, next) {
     {
       //user sign-up
       method: 'POST',
-      path: '/users',
+      path: '/api/v1/users',
       config: {
         handler: function(request, reply) {
           var db = request.server.plugins['hapi-mongodb'].db;
@@ -27,7 +27,7 @@ exports.register = function(server, options, next) {
           //Check
           db.collection('users').count(uniqueUser, function(err, userExist) {
             if (userExist) {
-              return reply ({exist: true});
+              return reply({exist: true});
             }
 
             //Encrypting Password
@@ -36,8 +36,8 @@ exports.register = function(server, options, next) {
                 user.password = encrypted;
                 db.collection('users').insert(user, function(err, writeResult) {
                   if (err) { return reply({message: "DB ERROR"});}
-                  //user write success
-                  reply(writeResult);
+                  //user write success  
+                  reply();
                 });
               });
             });
@@ -57,7 +57,7 @@ exports.register = function(server, options, next) {
     },
     {
       method: 'DELETE',
-      path: '/users/{username}',
+      path: '/api/v1/users/{username}',
       handler: function(request, reply) {
         var username = encodeURIComponent(request.params.username);
         var db = request.server.plugins['hapi-mongodb'].db;
