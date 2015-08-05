@@ -2,14 +2,18 @@
 var Request = require('request');
 var Joi = require('joi');
 var Auth = require('./auth');
+var isOwner = require('./is-owner');
 exports.register = function(server, options, next) {
   server.route([
     {
       method: 'GET',
-      path:'/api/v1/albums/{id}/images/{image_id}',
+      path:'/api/v1/albums',
       handler: function(request, reply) {
-        var search = request.query.search || "";
-        reply(request.params.id + " " + request.params.image_id + " " + search);
+        var db = request.server.plugins['hapi-mongodb'].db;
+        db.collection('albums').find().toArray(function(err, albums) {
+          if (err) { return reply(err);}
+          reply(albums);
+        });
       }
     },
     {
@@ -56,17 +60,9 @@ exports.register = function(server, options, next) {
           var user_id = request.session.get('slidshw_session').user_id;
           //get object by using id
           var id = ObjectID(request.params.id);
-          db.collection('albums').findOne({'_id':id}, function(err, albumFound) {
-            if (err) {return reply("err");}
-            if (!albumFound){
-              return reply({found: false})
-            }
-            if (albumFound.private && albumFound.user_id != user_id) {
-              return reply({authenticated: false});
-            }
-            reply(albumFound);
-       
-          });
+          isOwner.isPrivate(request, id, user_id, function(result) {
+            reply(result);
+          })
         },
         validate:{
           params:{
@@ -75,9 +71,34 @@ exports.register = function(server, options, next) {
         }
       }
     },
-    
-
-    ]);
+    {
+      method: 'DELETE',
+      path: '/api/v1/albums/{id}',
+      config: {
+        handler: function(request, reply) {
+          var db = request.server.plugins['hapi-mongodb'].db;
+          var ObjectID = request.server.plugins['hapi-mongodb'].ObjectID;
+          var album_id = ObjectID(request.params.id);
+          var user_id = request.session.get('slidshw_session').user_id;
+          //check if user is owner
+          isOwner.checkOwner(request, album_id, user_id, function(results) {
+            if (!results.found) {
+              return reply(results);
+            }
+            if (!results.owner) {
+              return reply(results);
+            }
+            if (results.owner) {
+              db.collection('albums').remove({"_id":album_id}, function(err, deleteResults) {
+                if (err) { return reply(err);}
+                return reply({deleted: true})
+              });       
+            }
+          });
+        }
+      }
+    }
+  ]);
 
   next();
 }
