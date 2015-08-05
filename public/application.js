@@ -18,7 +18,7 @@ $(document).ready(function() {
     $.ajax({
       context: this,
       type:"POST",
-      url:"/sessions",
+      url:"/api/v1/sessions",
       data: {
         user: user
       },
@@ -45,14 +45,14 @@ $(document).ready(function() {
     $.ajax({
       context: this,
       type:'POST',
-      url: '/users',
+      url: '/api/v1/users',
       data: {
         user: user
       },
       datatype: 'json',
       success: successFunction,
       error: function(response) {
-        console.log(response);
+        console.log(response.responseJSON.message);
       }
     });
   }
@@ -61,7 +61,7 @@ $(document).ready(function() {
     $.ajax({
       context: this,
       type:'DELETE',
-      url: '/sessions',
+      url: '/api/v1/sessions',
       success: function(response) {
         this.checkLogin();
       },
@@ -75,7 +75,7 @@ $(document).ready(function() {
   Communicator.prototype.checkLogin = function() {
     $.ajax({
       type:'GET',
-      url: '/authenticated',
+      url: '/api/v1/authenticated',
       success: function(response) {
         console.log(response);
         if (response.authenticated) {

@@ -5,7 +5,7 @@ exports.register = function (server, options, next) {
   server.route([
     {
       method: 'POST',
-      path: '/sessions',
+      path: '/api/v1/sessions',
       handler: function (request, reply) {
         var db = request.server.plugins['hapi-mongodb'].db;
 
@@ -55,7 +55,7 @@ exports.register = function (server, options, next) {
     },
     {
       method: 'GET',
-      path: '/authenticated',
+      path: '/api/v1/authenticated',
       handler: function (request, reply) {
         var callbackFunction = function (result) {
           reply(result);
@@ -65,7 +65,7 @@ exports.register = function (server, options, next) {
     },
     {
       method: 'DELETE',
-      path: '/sessions',
+      path: '/api/v1/sessions',
       handler: function (request, reply) {
         var db = request.server.plugins['hapi-mongodb'].db;
         //authenticate through cookie to make sure you're deleting your own session
