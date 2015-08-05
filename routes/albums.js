@@ -53,11 +53,19 @@ exports.register = function(server, options, next) {
         handler: function(request,reply) {
           var db = request.server.plugins['hapi-mongodb'].db;
           var ObjectID = request.server.plugins['hapi-mongodb'].ObjectID;
+          var user_id = request.session.get('slidshw_session').user_id;
           //get object by using id
           var id = ObjectID(request.params.id);
           db.collection('albums').findOne({'_id':id}, function(err, albumFound) {
-            if (err) {return reply(err);}
+            if (err) {return reply("err");}
+            if (!albumFound){
+              return reply({found: false})
+            }
+            if (albumFound.private && albumFound.user_id != user_id) {
+              return reply({authenticated: false});
+            }
             reply(albumFound);
+       
           });
         },
         validate:{
@@ -66,7 +74,9 @@ exports.register = function(server, options, next) {
           }
         }
       }
-    }
+    },
+    
+
     ]);
 
   next();
