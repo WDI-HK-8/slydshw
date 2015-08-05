@@ -97,6 +97,26 @@ exports.register = function(server, options, next) {
           });
         }
       }
+    },
+    {
+      method: 'PATCH',
+      path: '/api/v1/albums/{id}',
+      config: {
+        handler: function(request, reply) {
+          var db = request.server.plugins['hapi-mongodb'].db;
+          var ObjectID = request.server.plugins['hapi-mongodb'].ObjectID;
+          album_id = ObjectID(request.params.id);
+          user_id = request.session.get('slidshw_session').user_id;
+
+          isOwner.checkOwner(request, album_id, user_id, function(results) {
+              if(!results.found || !results.owner ) {
+                return reply(results)
+              }
+              //is owner so push updates
+              reply(results);
+          })
+        }
+      }
     }
   ]);
 

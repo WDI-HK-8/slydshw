@@ -33,6 +33,21 @@
           <!-- /main-field -->
         </section>
         <section class="sidebar col-md-3 col-xs-12 container-fluid">
+          <div class="create-album-bar">
+            <h4>Create Album</h4>
+            <form id="create-album">
+              <input type="text" name="create-album-name" class="form-control" placeholder="Album Name">
+              <textarea rows="5" type="text" name="create-album-description" class="form-control" placeholder="Description"></textarea>
+              <div class="input-group">
+                <div class="input-group-addon">#</div>
+                <input type="text" class="form-control" name="create-album-name" placeholder="Hashtag">
+              </div>
+              <label>
+                <input name="create-album-private" type="checkbox"> Private
+              </label>
+              <input type="submit" class="btn btn-default pull-right" name="create-album-submit" value="Create Album">
+            </form>
+          </div>
           <div class="login-bar">
             <form id="login">
               <input type="text" name="username-login" class="form-control" placeholder="Username">

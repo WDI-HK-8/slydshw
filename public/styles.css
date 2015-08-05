@@ -28,6 +28,10 @@ h1 {
   margin-bottom:20px;
 }
 
+.sidebar div {
+  margin-bottom:20px;
+}
+
 .album .latest-albums {
   list-style-type: none;
 }
@@ -35,6 +39,20 @@ h1 {
 .alert-danger {
   margin-top: 50px;
   display: none;
+}
+
+
+.create-album-bar {
+  display:none;
+}
+#create-album input[name="create-album-submit"] {
+  clear:both;
+  margin-top:20px;
+}
+
+#create-album textarea {
+  margin-bottom: 20px;
+  resize:none;
 }
 
 /* Medium Devices, Desktops */

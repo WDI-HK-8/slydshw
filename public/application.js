@@ -82,8 +82,11 @@ $(document).ready(function() {
           $('.navbar-right').append('<li><a id="log-out-link" href="#">Log Out</a></li>');
           $('#show-username').text(response.username);
           $('.login-bar').hide();
+          $('.create-album-bar').show();
         } else {
+          $('.create-album-bar').hide();
           $('.login-bar').show();
+
           $('#show-username').text("Guest");
           $('#log-out-link').remove();
         }
